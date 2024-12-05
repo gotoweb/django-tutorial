@@ -121,8 +121,22 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": "db.sqlite3"
+    },
+    "postgres": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "postgres",
+        "USER": os.getenv('DB_USER'),
+        "PASSWORD": os.getenv('DB_PASSWORD'),
+        "HOST": os.getenv('DB_HOST'),
+        "PORT": "5432",
     }
 }
+
+active_db = os.getenv('ACTIVE_DB', 'default')
+if active_db in DATABASES:
+    DATABASES['default'] = DATABASES[active_db]
+else:
+    raise ValueError(f"Invalid ACTIVE_DB: {active_db}")
 
 
 # Password validation
