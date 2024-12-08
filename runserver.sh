@@ -29,4 +29,4 @@ echo "Server PID는 $SERVER_PID 번입니다. 해당 프로세스를 죽입니�
 kill -15 $SERVER_PID
 
 # 서버 새로 실행 (백그라운드로)
-DEBUG=True nohup python3 manage.py runserver > server.log 2>&1 &
+DEBUG=True nohup python3 manage.py runserver 0.0.0.0:8000 > server.log 2>&1 &
